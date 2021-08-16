@@ -1,0 +1,1 @@
+['--train_src', '../../../NIST_dataset/sd302/sd302a ../../../NIST_dataset/sd302/sd302c ../../../NIST_dataset/sd302/sd302d', '--test_src', '../../../NIST_dataset/sd302/sd302b', '--dest', 'MainHypothesis/TransferLearning/fingerprint_data/', '--summary']

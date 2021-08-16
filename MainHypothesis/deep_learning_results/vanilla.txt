@@ -1,0 +1,20 @@
+val fgrp 1
+{'train_time': '20m 28s', 'top1': (tensor(0.2518, device='cuda:0', dtype=torch.float64), 24), 'top3': (0.42124542124542125, 23), 'val_finger': '01', 'top5': (0.5173992673992674, 16)}
+val fgrp 2
+{'train_time': '20m 0s', 'top1': (tensor(0.2949, device='cuda:0', dtype=torch.float64), 23), 'top3': (0.5073260073260073, 23), 'val_finger': '02', 'top5': (0.6208791208791209, 23)}
+val fgrp 3
+{'train_time': '19m 56s', 'top1': (tensor(0.4698, device='cuda:0', dtype=torch.float64), 23), 'top3': (0.6785714285714286, 23), 'val_finger': '03', 'top5': (0.7628205128205128, 23)}
+val fgrp 4
+{'train_time': '19m 59s', 'top1': (tensor(0.4927, device='cuda:0', dtype=torch.float64), 17), 'top3': (0.6785714285714286, 17), 'val_finger': '04', 'top5': (0.7545787545787546, 17)}
+val fgrp 5
+{'train_time': '19m 54s', 'top1': (tensor(0.3297, device='cuda:0', dtype=torch.float64), 20), 'top3': (0.5357142857142857, 18), 'val_finger': '05', 'top5': (0.6373626373626373, 18)}
+val fgrp 6
+{'train_time': '20m 38s', 'top1': (tensor(0.2399, device='cuda:0', dtype=torch.float64), 23), 'top3': (0.43772893772893773, 23), 'val_finger': '06', 'top5': (0.5366300366300366, 21)}
+val fgrp 7
+{'train_time': '19m 57s', 'top1': (tensor(0.4203, device='cuda:0', dtype=torch.float64), 20), 'top3': (0.586996336996337, 20), 'val_finger': '07', 'top5': (0.6639194139194139, 13)}
+val fgrp 8
+{'train_time': '19m 58s', 'top1': (tensor(0.5266, device='cuda:0', dtype=torch.float64), 19), 'top3': (0.7234432234432234, 22), 'val_finger': '08', 'top5': (0.8012820512820513, 22)}
+val fgrp 9
+{'train_time': '19m 55s', 'top1': (tensor(0.4579, device='cuda:0', dtype=torch.float64), 21), 'top3': (0.6886446886446886, 23), 'val_finger': '09', 'top5': (0.7646520146520146, 21)}
+val fgrp 10
+{'train_time': '19m 52s', 'top1': (tensor(0.3608, device='cuda:0', dtype=torch.float64), 19), 'top3': (0.5815018315018315, 16), 'val_finger': '10', 'top5': (0.6657509157509157, 19)}

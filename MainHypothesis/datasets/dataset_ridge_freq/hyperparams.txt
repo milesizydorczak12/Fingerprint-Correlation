@@ -1,0 +1,7 @@
+num_epochs = 25
+batch_size = 32
+learning_rate = 0.01
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+pretrained = True

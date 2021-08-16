@@ -1,0 +1,131 @@
+val fgrp 1
+
+BATCH_SIZE=128
+LEARNING_RATE=0.05
+NUM_EPOCHS=25
+LR_DECAY_FACTOR=0.75
+LR_DECAY_STEP=4
+MOMENTUM=0.9
+WEIGHT_DECAY=0.001
+IS_PRETRAINED=True
+{'top1': (tensor(0.0321, device='cuda:0', dtype=torch.float64), 16), 'top3': (0.07234432234432235, 13), 'train_time': '17m 4s', 'val_finger': '01', 'top5': (0.10989010989010989, 22)}
+
+
+********************val fgrp 2
+
+BATCH_SIZE=128
+LEARNING_RATE=0.05
+NUM_EPOCHS=25
+LR_DECAY_FACTOR=0.75
+LR_DECAY_STEP=4
+MOMENTUM=0.9
+WEIGHT_DECAY=0.001
+IS_PRETRAINED=True
+{'top1': (tensor(0.0293, device='cuda:0', dtype=torch.float64), 14), 'top3': (0.07234432234432235, 20), 'train_time': '16m 41s', 'val_finger': '02', 'top5': (0.10714285714285714, 20)}
+
+
+********************val fgrp 3
+
+BATCH_SIZE=128
+LEARNING_RATE=0.05
+NUM_EPOCHS=25
+LR_DECAY_FACTOR=0.75
+LR_DECAY_STEP=4
+MOMENTUM=0.9
+WEIGHT_DECAY=0.001
+IS_PRETRAINED=True
+{'top1': (tensor(0.0339, device='cuda:0', dtype=torch.float64), 20), 'top3': (0.08516483516483517, 20), 'train_time': '16m 41s', 'val_finger': '03', 'top5': (0.12728937728937728, 20)}
+
+
+********************val fgrp 4
+
+BATCH_SIZE=128
+LEARNING_RATE=0.05
+NUM_EPOCHS=25
+LR_DECAY_FACTOR=0.75
+LR_DECAY_STEP=4
+MOMENTUM=0.9
+WEIGHT_DECAY=0.001
+IS_PRETRAINED=True
+{'top1': (tensor(0.0375, device='cuda:0', dtype=torch.float64), 20), 'top3': (0.08333333333333333, 16), 'train_time': '16m 41s', 'val_finger': '04', 'top5': (0.12637362637362637, 21)}
+
+
+********************val fgrp 5
+
+BATCH_SIZE=128
+LEARNING_RATE=0.05
+NUM_EPOCHS=25
+LR_DECAY_FACTOR=0.75
+LR_DECAY_STEP=4
+MOMENTUM=0.9
+WEIGHT_DECAY=0.001
+IS_PRETRAINED=True
+{'top1': (tensor(0.0339, device='cuda:0', dtype=torch.float64), 24), 'top3': (0.07142857142857142, 24), 'train_time': '16m 43s', 'val_finger': '05', 'top5': (0.11446886446886446, 24)}
+
+
+********************val fgrp 6
+
+BATCH_SIZE=128
+LEARNING_RATE=0.05
+NUM_EPOCHS=25
+LR_DECAY_FACTOR=0.75
+LR_DECAY_STEP=4
+MOMENTUM=0.9
+WEIGHT_DECAY=0.001
+IS_PRETRAINED=True
+{'top1': (tensor(0.0321, device='cuda:0', dtype=torch.float64), 20), 'top3': (0.07509157509157509, 18), 'train_time': '17m 12s', 'val_finger': '06', 'top5': (0.10714285714285714, 16)}
+
+
+********************val fgrp 7
+
+BATCH_SIZE=128
+LEARNING_RATE=0.05
+NUM_EPOCHS=25
+LR_DECAY_FACTOR=0.75
+LR_DECAY_STEP=4
+MOMENTUM=0.9
+WEIGHT_DECAY=0.001
+IS_PRETRAINED=True
+{'top1': (tensor(0.0293, device='cuda:0', dtype=torch.float64), 21), 'top3': (0.07326007326007326, 21), 'train_time': '16m 41s', 'val_finger': '07', 'top5': (0.10989010989010989, 24)}
+
+
+********************val fgrp 8
+
+BATCH_SIZE=128
+LEARNING_RATE=0.05
+NUM_EPOCHS=25
+LR_DECAY_FACTOR=0.75
+LR_DECAY_STEP=4
+MOMENTUM=0.9
+WEIGHT_DECAY=0.001
+IS_PRETRAINED=True
+{'top1': (tensor(0.0220, device='cuda:0', dtype=torch.float64), 23), 'top3': (0.05128205128205128, 23), 'train_time': '16m 39s', 'val_finger': '08', 'top5': (0.08241758241758242, 17)}
+
+
+********************val fgrp 9
+
+BATCH_SIZE=128
+LEARNING_RATE=0.05
+NUM_EPOCHS=25
+LR_DECAY_FACTOR=0.75
+LR_DECAY_STEP=4
+MOMENTUM=0.9
+WEIGHT_DECAY=0.001
+IS_PRETRAINED=True
+{'top1': (tensor(0.0430, device='cuda:0', dtype=torch.float64), 23), 'top3': (0.0924908424908425, 23), 'train_time': '16m 42s', 'val_finger': '09', 'top5': (0.1282051282051282, 24)}
+
+
+********************val fgrp 10
+
+BATCH_SIZE=128
+LEARNING_RATE=0.05
+NUM_EPOCHS=25
+LR_DECAY_FACTOR=0.75
+LR_DECAY_STEP=4
+MOMENTUM=0.9
+WEIGHT_DECAY=0.001
+IS_PRETRAINED=True
+{'top1': (tensor(0.0476, device='cuda:0', dtype=torch.float64), 24), 'top3': (0.10164835164835165, 24), 'train_time': '16m 41s', 'val_finger': '10', 'top5': (0.14102564102564102, 24)}
+
+
+********************

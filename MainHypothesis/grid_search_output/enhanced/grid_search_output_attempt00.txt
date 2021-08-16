@@ -1,0 +1,288 @@
+num_epochs = 20
+batch_size = 8
+learning_rate = 1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.02564102564102564, 1), 'train_time': '21m 18s', 'top1': (tensor(0.0055, device='cuda:0', dtype=torch.float64), 1), 'top3': (0.015567765567765568, 3)}
+
+num_epochs = 20
+batch_size = 8
+learning_rate = 0.1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.27014652014652013, 18), 'train_time': '21m 45s', 'top1': (tensor(0.1044, device='cuda:0', dtype=torch.float64), 16), 'top3': (0.20238095238095238, 18)}
+
+num_epochs = 20
+batch_size = 8
+learning_rate = 0.01
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.3543956043956044, 16), 'train_time': '21m 46s', 'top1': (tensor(0.1319, device='cuda:0', dtype=torch.float64), 18), 'top3': (0.2600732600732601, 16)}
+
+num_epochs = 20
+batch_size = 8
+learning_rate = 0.001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.3983516483516483, 10), 'train_time': '21m 51s', 'top1': (tensor(0.1712, device='cuda:0', dtype=torch.float64), 19), 'top3': (0.31135531135531136, 10)}
+
+num_epochs = 20
+batch_size = 8
+learning_rate = 0.0001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.2509157509157509, 14), 'train_time': '21m 60s', 'top1': (tensor(0.0861, device='cuda:0', dtype=torch.float64), 15), 'top3': (0.19230769230769232, 15)}
+
+num_epochs = 20
+batch_size = 8
+learning_rate = 1e-05
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.05860805860805861, 16), 'train_time': '21m 57s', 'top1': (tensor(0.0192, device='cuda:0', dtype=torch.float64), 17), 'top3': (0.040293040293040296, 19)}
+
+num_epochs = 20
+batch_size = 16
+learning_rate = 1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.14377289377289376, 19), 'train_time': '16m 11s', 'top1': (tensor(0.0485, device='cuda:0', dtype=torch.float64), 17), 'top3': (0.09798534798534798, 19)}
+
+num_epochs = 20
+batch_size = 16
+learning_rate = 0.1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.30128205128205127, 19), 'train_time': '16m 9s', 'top1': (tensor(0.1007, device='cuda:0', dtype=torch.float64), 18), 'top3': (0.2087912087912088, 18)}
+
+num_epochs = 20
+batch_size = 16
+learning_rate = 0.01
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.3956043956043956, 18), 'train_time': '16m 10s', 'top1': (tensor(0.1777, device='cuda:0', dtype=torch.float64), 19), 'top3': (0.32051282051282054, 19)}
+
+num_epochs = 20
+batch_size = 16
+learning_rate = 0.001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.423992673992674, 14), 'train_time': '16m 12s', 'top1': (tensor(0.1941, device='cuda:0', dtype=torch.float64), 14), 'top3': (0.336996336996337, 14)}
+
+num_epochs = 20
+batch_size = 16
+learning_rate = 0.0001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.16391941391941392, 15), 'train_time': '16m 9s', 'top1': (tensor(0.0568, device='cuda:0', dtype=torch.float64), 19), 'top3': (0.12545787545787546, 19)}
+
+num_epochs = 20
+batch_size = 16
+learning_rate = 1e-05
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.047619047619047616, 18), 'train_time': '16m 13s', 'top1': (tensor(0.0128, device='cuda:0', dtype=torch.float64), 10), 'top3': (0.0347985347985348, 18)}
+
+num_epochs = 20
+batch_size = 32
+learning_rate = 1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.18406593406593408, 19), 'train_time': '14m 55s', 'top1': (tensor(0.0504, device='cuda:0', dtype=torch.float64), 19), 'top3': (0.13644688644688643, 19)}
+
+num_epochs = 20
+batch_size = 32
+learning_rate = 0.1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.2875457875457875, 18), 'train_time': '14m 56s', 'top1': (tensor(0.1136, device='cuda:0', dtype=torch.float64), 18), 'top3': (0.22527472527472528, 18)}
+
+num_epochs = 20
+batch_size = 32
+learning_rate = 0.01
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.43131868131868134, 14), 'train_time': '14m 59s', 'top1': (tensor(0.1914, device='cuda:0', dtype=torch.float64), 9), 'top3': (0.3333333333333333, 14)}
+
+num_epochs = 20
+batch_size = 32
+learning_rate = 0.001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.3782051282051282, 16), 'train_time': '14m 57s', 'top1': (tensor(0.1529, device='cuda:0', dtype=torch.float64), 16), 'top3': (0.2948717948717949, 16)}
+
+num_epochs = 20
+batch_size = 32
+learning_rate = 0.0001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.12179487179487179, 16), 'train_time': '14m 58s', 'top1': (tensor(0.0403, device='cuda:0', dtype=torch.float64), 16), 'top3': (0.09157509157509157, 15)}
+
+num_epochs = 20
+batch_size = 32
+learning_rate = 1e-05
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.04395604395604396, 15), 'train_time': '14m 60s', 'top1': (tensor(0.0101, device='cuda:0', dtype=torch.float64), 10), 'top3': (0.028388278388278388, 12)}
+
+num_epochs = 20
+batch_size = 64
+learning_rate = 1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.023809523809523808, 0), 'train_time': '14m 13s', 'top1': (tensor(0.0046, device='cuda:0', dtype=torch.float64), 0), 'top3': (0.013736263736263736, 0)}
+
+num_epochs = 20
+batch_size = 64
+learning_rate = 0.1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.391025641025641, 17), 'train_time': '14m 20s', 'top1': (tensor(0.1612, device='cuda:0', dtype=torch.float64), 17), 'top3': (0.304029304029304, 17)}
+
+num_epochs = 20
+batch_size = 64
+learning_rate = 0.01
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.4523809523809524, 18), 'train_time': '14m 23s', 'top1': (tensor(0.2161, device='cuda:0', dtype=torch.float64), 18), 'top3': (0.3717948717948718, 18)}
+
+num_epochs = 20
+batch_size = 64
+learning_rate = 0.001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.3021978021978022, 15), 'train_time': '14m 21s', 'top1': (tensor(0.1227, device='cuda:0', dtype=torch.float64), 19), 'top3': (0.2261904761904762, 15)}
+
+num_epochs = 20
+batch_size = 64
+learning_rate = 0.0001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.08608058608058608, 18), 'train_time': '14m 23s', 'top1': (tensor(0.0211, device='cuda:0', dtype=torch.float64), 18), 'top3': (0.0521978021978022, 17)}
+
+num_epochs = 20
+batch_size = 64
+learning_rate = 1e-05
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.03388278388278388, 15), 'train_time': '14m 25s', 'top1': (tensor(0.0082, device='cuda:0', dtype=torch.float64), 17), 'top3': (0.021062271062271064, 0)}
+
+num_epochs = 20
+batch_size = 128
+learning_rate = 1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.05128205128205128, 17), 'train_time': '13m 21s', 'top1': (tensor(0.0128, device='cuda:0', dtype=torch.float64), 16), 'top3': (0.028388278388278388, 17)}
+
+num_epochs = 20
+batch_size = 128
+learning_rate = 0.1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.40384615384615385, 19), 'train_time': '13m 22s', 'top1': (tensor(0.1740, device='cuda:0', dtype=torch.float64), 19), 'top3': (0.3131868131868132, 19)}
+
+num_epochs = 20
+batch_size = 128
+learning_rate = 0.01
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.4340659340659341, 19), 'train_time': '13m 21s', 'top1': (tensor(0.2161, device='cuda:0', dtype=torch.float64), 14), 'top3': (0.3489010989010989, 14)}
+
+num_epochs = 20
+batch_size = 128
+learning_rate = 0.001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.20512820512820512, 16), 'train_time': '13m 20s', 'top1': (tensor(0.0723, device='cuda:0', dtype=torch.float64), 16), 'top3': (0.152014652014652, 16)}
+
+num_epochs = 20
+batch_size = 128
+learning_rate = 0.0001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.040293040293040296, 19), 'train_time': '13m 20s', 'top1': (tensor(0.0137, device='cuda:0', dtype=torch.float64), 7), 'top3': (0.026556776556776556, 16)}
+
+num_epochs = 20
+batch_size = 128
+learning_rate = 1e-05
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.031135531135531136, 17), 'train_time': '13m 20s', 'top1': (tensor(0.0073, device='cuda:0', dtype=torch.float64), 1), 'top3': (0.016483516483516484, 11)}
+
+num_epochs = 20
+batch_size = 256
+learning_rate = 1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.023809523809523808, 13), 'train_time': '13m 57s', 'top1': (tensor(0.0055, device='cuda:0', dtype=torch.float64), 10), 'top3': (0.016483516483516484, 17)}
+
+num_epochs = 20
+batch_size = 256
+learning_rate = 0.1
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.3772893772893773, 19), 'train_time': '13m 59s', 'top1': (tensor(0.1694, device='cuda:0', dtype=torch.float64), 18), 'top3': (0.2948717948717949, 16)}
+
+num_epochs = 20
+batch_size = 256
+learning_rate = 0.01
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.36538461538461536, 19), 'train_time': '13m 60s', 'top1': (tensor(0.1566, device='cuda:0', dtype=torch.float64), 13), 'top3': (0.29120879120879123, 13)}
+
+num_epochs = 20
+batch_size = 256
+learning_rate = 0.001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.12362637362637363, 16), 'train_time': '13m 57s', 'top1': (tensor(0.0385, device='cuda:0', dtype=torch.float64), 10), 'top3': (0.09432234432234432, 19)}
+
+num_epochs = 20
+batch_size = 256
+learning_rate = 0.0001
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.031135531135531136, 15), 'train_time': '13m 55s', 'top1': (tensor(0.0055, device='cuda:0', dtype=torch.float64), 9), 'top3': (0.020146520146520148, 12)}
+
+num_epochs = 20
+batch_size = 256
+learning_rate = 1e-05
+lr_factor = 0.8
+lr_step = 2
+weight_decay = 5e-05
+{'top5': (0.02564102564102564, 5), 'train_time': '13m 57s', 'top1': (tensor(0.0037, device='cuda:0', dtype=torch.float64), 0), 'top3': (0.016483516483516484, 18)}
+
