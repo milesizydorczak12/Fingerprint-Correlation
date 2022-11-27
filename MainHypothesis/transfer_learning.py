@@ -16,7 +16,8 @@ import os
 import copy
 import sys
 
-sys.path.append('/home/gabeguo/Biometric_Research/Fingerprint/REU-Biometrics-1F/')
+#sys.path.append('/home/gabeguo/Biometric_Research/Fingerprint/REU-Biometrics-1F/')
+sys.path.append('../')
 
 from fileProcessingUtil import *
 
@@ -42,7 +43,7 @@ data_transforms = {
     ]),
 }
 
-data_dir = 'fingerprint_data'
+data_dir = '/data/therealgabeguo/fingerprint_data/sd302_oldFingerprintExperiments'#'fingerprint_data'
 
 def get_finger_left_out(class_names):
 	an_img = os.listdir(os.path.join(data_dir, 'val', class_names[0]))[0]
