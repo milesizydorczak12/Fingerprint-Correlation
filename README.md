@@ -5,9 +5,8 @@ Summer research project to analyze the pattern correlation among ten fingerprint
 
 Data Split:
 - Get the dataset from NIST.
-- Run gather_nist_data.py
-- Run helpful_scripts/split_files_by_sensor_letter.py to separate the fingerprint images into two mutually exclusive sets by sensors used. The first set should be fingerprints that can be used for training (subdirectory called 'train'), and the second set should be fingerprints that can be used for testing (subdirectory called 'val'). Both sets should contain samples of all ten fingerprint types, but the sensors that were used to gather the data for the two sets should be mutually exclusive. This way, in the experiments, the discovered correlation would not be due to factors related to sensors, but rather, intrinsic to fingerprints.
-- Run general_train_test_split.py on the directory that we previously put the train-test split into, so that training and testing use mutually exclusive finger types (e.g., left pinky, right thumb). The used samples will stay in 'train' and 'val', respectively; the unused samples (that would cause overlapping finger types between sets) go into 'train_unused' and 'val_unused', respectively. Now, the training and testing (i.e., validation) sets should have no overlap in finger types used or sensors used to gather the data, which should mean that any discovered correlation would be due to intrinsic fingerprint patterns common to all of a person's fingerprints.
+- Run gather_nist_data.py, which does a train-val split on the data.
+- Run general_train_test_split.py on the directory that we previously put the train-val split into, so that training and testing use mutually exclusive finger types (e.g., left pinky, right thumb). The used samples will stay in 'train' and 'val', respectively; the unused samples (that would cause overlapping finger types between sets) go into 'train_unused' and 'val_unused', respectively. Now, the training and testing (i.e., validation) sets should have no overlap in finger types used or sensors used to gather the data, which should mean that any discovered correlation would be due to intrinsic fingerprint patterns common to all of a person's fingerprints.
 
 Deep Learning Analysis:
 - Run MainHypothesis/run_all_fgrp.py.
