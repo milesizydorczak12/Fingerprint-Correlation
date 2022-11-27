@@ -8,14 +8,12 @@ import statistics
 
 from fileProcessingUtil import *
 
-DATA_FOLDER_NAME = 'fingerprint_data'
-
 def get_pid_fgrp(filename):
     return (get_id(filename), get_fgrp(filename))
 
 # Precondition:
-#   [root_dir] is the directory storing all the scripts, and has a subdirectory with the gathered nist data;
-#    this subdirectory has train & test folders,
+#   [root_dir] is the directory storing all the gathered nist data;
+#    its immediate subdirectories are train and val
 #    data is organized by pid
 def split(root_dir, val_fgrps, train_fgrps):
     # keep track of how many samples per person and fgrp
@@ -25,10 +23,11 @@ def split(root_dir, val_fgrps, train_fgrps):
     fgrp_2_numUsedSamples = {'val':dict(),'train':dict()}
 
     # file directories
-    data_path = os.path.join(root_dir, DATA_FOLDER_NAME)
+    data_path = root_dir
 
     val_path = os.path.join(data_path, 'val')
     train_path = os.path.join(data_path, 'train')
+    #print(val_path, train_path)
     assert os.path.exists(val_path)
     assert os.path.exists(train_path)
 

@@ -1,14 +1,14 @@
 import os, sys
 
-sys.path.append('/home/gabeguo/Biometric_Research/Fingerprint/REU-Biometrics-1F/')
-root_dir = '/home/gabeguo/Biometric_Research/Fingerprint/REU-Biometrics-1F/MainHypothesis/TransferLearning'
+#sys.path.append('/home/gabeguo/Biometric_Research/Fingerprint/REU-Biometrics-1F/')
+sys.path.append('../')
+root_dir = '/data/therealgabeguo/fingerprint_data/sd302_oldFingerprintExperiments'
 
 if __name__ == '__main__':
     import general_train_test_split
     import transfer_learning
 
-    TYPE_FILENAME = 'datatype.txt'
-    HYPERPARAM_FILENAME = 'hyperparams.txt'
+    FEATURE_INFO_FNAME = 'features_examined.txt'
 
     BATCH_SIZE=16
     LEARNING_RATE=0.001
@@ -19,33 +19,12 @@ if __name__ == '__main__':
     WEIGHT_DECAY=5e-5
     IS_PRETRAINED=True
 
-    with open('fingerprint_data/' + TYPE_FILENAME, 'r') as fin:
-        datatype = fin.readline().strip()
-    with open('fingerprint_data/' + HYPERPARAM_FILENAME, 'r') as fin:
-        for line in fin.readlines():
-            tokens = [item.strip() for item in line.split('=')]
-            print(tokens)
-            hyperparam_name, value = tokens[0], tokens[1]
-            if hyperparam_name == 'num_epochs':
-                NUM_EPOCHS = int(value)
-            elif hyperparam_name == 'batch_size':
-                BATCH_SIZE = int(value)
-            elif hyperparam_name == 'learning_rate':
-                LEARNING_RATE = float(value)
-            elif hyperparam_name == 'lr_factor':
-                LR_DECAY_FACTOR = float(value)
-            elif hyperparam_name == 'lr_step':
-                LR_DECAY_STEP = int(value)
-            elif hyperparam_name == 'weight_decay':
-                WEIGHT_DECAY = float(value)
-            elif hyperparam_name == 'pretrained':
-                IS_PRETRAINED = bool(value)
-            elif hyperparam_name == 'momentum':
-                MOMENTUM = float(value)
+    with open('fingerprint_data/' + FEATURE_INFO_FNAME, 'r') as fin:
+        features_examined = fin.readline().strip()
 
-    print('datatype:', datatype)
+    print('features examined:', features_examined)
 
-    with open('deep_learning_results/' + datatype.strip() + '.txt', 'w') as fout:
+    with open('deep_learning_results/' + features_examined.strip() + '.txt', 'w') as fout:
         for i in range(1, 10 + 1):
             print('running train test split to val', i)
             general_train_test_split.main(root_dir=root_dir, train_fgrps=[j for j in range(1, 10 + 1) if i != j], val_fgrps = [i])
