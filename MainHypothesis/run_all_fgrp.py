@@ -25,7 +25,7 @@ if __name__ == '__main__':
     print('features examined:', features_examined)
 
     with open('deep_learning_results/' + features_examined.strip() + '.txt', 'w') as fout:
-        for i in range(1, 10 + 1):
+        for i in range(1, 2):#10 + 1):
             print('running train test split to val', i)
             general_train_test_split.main(root_dir=root_dir, train_fgrps=[j for j in range(1, 10 + 1) if i != j], val_fgrps = [i])
             #os.system('python3 train_test_split.py ' + str(i))
