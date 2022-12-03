@@ -52,6 +52,13 @@ shap_values = e.shap_values(test_images)
 
 print(len(shap_values), shap_values[0].shape)
 
-the_heatmap = np.transpose(np.reshape(shap_values[0], (3, 224, 224)), (1, 2, 0))
+# need to sum over
+the_heatmap = np.reshape(shap_values[0], (3, 224, 224))
+the_heatmap = np.transpose(the_heatmap, (1, 2, 0))
+the_heatmap = np.sum(the_heatmap, axis=2)
+the_heatmap = (the_heatmap - np.min(the_heatmap)) / np.ptp(the_heatmap)
+#the_heatmap = np.transpose(np.reshape(shap_values[0], (3, 224, 224)), (1, 2, 0))
+
 plt.imshow(the_heatmap)
+plt.gray()
 plt.show()
