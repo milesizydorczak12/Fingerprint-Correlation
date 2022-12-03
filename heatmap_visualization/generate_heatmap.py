@@ -8,6 +8,8 @@ import torch.nn as nn
 import torchvision
 from torchvision import datasets, models, transforms
 
+import matplotlib.pyplot as plt
+
 data_dir= '/data/therealgabeguo/fingerprint_data/sd302_oldFingerprintExperiments'
 batch_size=1
 device = 'cuda:0'
@@ -48,4 +50,8 @@ print(test_images.size())
 e = shap.DeepExplainer(model, background)
 shap_values = e.shap_values(test_images)
 
-print(shap_values.shape)
+print(len(shap_values), shap_values[0].shape)
+
+the_heatmap = np.transpose(np.reshape(shap_values[0], (3, 224, 224)), (1, 2, 0))
+plt.imshow(the_heatmap)
+plt.show()
