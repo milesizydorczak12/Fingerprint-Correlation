@@ -1,4 +1,5 @@
 import shap
+from shap.plots import colors
 
 import numpy as np
 import os
@@ -38,13 +39,17 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 
 background = next(iter(dataloaders['train']))[0]
+background = background.to(device)
 print(background.size())
+
 model = models.resnet18()
 model.fc = nn.Linear(model.fc.in_features, 200)
 model.load_state_dict(torch.load(model_wts_path))
 model.eval()
+model = model.to(device)
 
 test_images = next(iter(dataloaders['val']))[0]
+test_images = test_images.to(device)
 print(test_images.size())
 
 e = shap.DeepExplainer(model, background)
@@ -67,6 +72,18 @@ full_heatmap = np.stack([positive_heatmap, np.zeros(positive_heatmap.shape), neg
 #the_heatmap = (the_heatmap - np.min(the_heatmap)) / np.ptp(the_heatmap)
 #the_heatmap = np.transpose(np.reshape(shap_values[0], (3, 224, 224)), (1, 2, 0))
 
-plt.imshow(full_heatmap)
-plt.imsave('test_heatmap.png', full_heatmap)
+the_image = test_images[0].permute((1, 2, 0)).cpu().numpy()
+
+plt.imshow(the_image, cmap='gray')
 plt.show()
+
+plt.imshow(the_heatmap, cmap=colors.red_transparent_blue, vmin=-max_val, vmax=max_val)
+plt.show()
+
+plt.imshow(full_heatmap)
+plt.show()
+
+plt.imsave('the_heatmap.png', the_heatmap, cmap=colors.red_transparent_blue, vmin=-max_val, vmax=max_val)
+
+print('red is more certain')
+print('blue is less certain')
