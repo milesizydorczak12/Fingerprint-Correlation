@@ -88,7 +88,7 @@ print(shap_values[0].shape)
 
 for i in range(test_batch_size):
     # heatmap for true label and random label
-    for curr_person in [test_labels[i], test_labels[(i + 1) % 200]]:
+    for curr_person in test_labels:
         the_heatmap = np.reshape(shap_values[curr_person][i], (3, 224, 224))
         the_heatmap = np.transpose(the_heatmap, (1, 2, 0))
         the_heatmap = np.sum(the_heatmap, axis=2)
