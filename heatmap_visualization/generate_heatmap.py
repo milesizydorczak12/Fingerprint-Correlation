@@ -13,9 +13,9 @@ import matplotlib.pyplot as plt
 
 data_dir= '/data/therealgabeguo/fingerprint_data/sd302_oldFingerprintExperiments'
 train_batch_size=128
-test_batch_size=4
+test_batch_size=16
 device = 'cuda:0'
-model_wts_path = 'resnet_fingerprint01'
+model_wts_path = 'resnet_fingerprint08'
 
 # Credit:
 #   https://gist.github.com/andrewjong/6b02ff237533b3b2c554701fb53d5c4d
