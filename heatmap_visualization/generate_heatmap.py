@@ -101,11 +101,11 @@ for i in range(test_batch_size):
         #plt.show()
 
         plt.imshow(the_heatmap, cmap=colors.red_transparent_blue, vmin=-max_val, vmax=max_val)
-        #plt.show()
-
         the_filename = test_paths[i].split('/')[-1]
-
         plt.imsave('shap_outputs/' + the_filename[:-4] + '_shap{}'.format(class_names[curr_person]) + '.png', the_heatmap, cmap=colors.red_transparent_blue, vmin=-max_val, vmax=max_val)
+        
+        plt.imshow(the_image, cmap='gray', vmin=np.min(the_image), vmax=np.max(the_image))
+        plt.imsave('shap_outputs/' + the_filename, the_image, cmap='gray', vmin=np.min(the_image), vmax=np.max(the_image))
 
 print('red is more certain')
 print('blue is less certain')
