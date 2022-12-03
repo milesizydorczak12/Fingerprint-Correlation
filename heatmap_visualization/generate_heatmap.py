@@ -56,9 +56,17 @@ print(len(shap_values), shap_values[0].shape)
 the_heatmap = np.reshape(shap_values[0], (3, 224, 224))
 the_heatmap = np.transpose(the_heatmap, (1, 2, 0))
 the_heatmap = np.sum(the_heatmap, axis=2)
-the_heatmap = (the_heatmap - np.min(the_heatmap)) / np.ptp(the_heatmap)
+
+positive_heatmap = np.abs(the_heatmap * (the_heatmap > 0))
+negative_heatmap = np.abs(the_heatmap * (the_heatmap < 0))
+max_val = max(np.max(positive_heatmap), np.max(negative_heatmap))
+positive_heatmap /= max_val
+negative_heatmap /= max_val
+
+full_heatmap = np.stack([positive_heatmap, np.zeros(positive_heatmap.shape), negative_heatmap], axis=2)
+#the_heatmap = (the_heatmap - np.min(the_heatmap)) / np.ptp(the_heatmap)
 #the_heatmap = np.transpose(np.reshape(shap_values[0], (3, 224, 224)), (1, 2, 0))
 
-plt.imshow(the_heatmap)
-plt.gray()
+plt.imshow(full_heatmap)
+plt.imsave('test_heatmap.png', full_heatmap)
 plt.show()
