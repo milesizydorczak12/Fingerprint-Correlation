@@ -96,6 +96,7 @@ for i in range(test_batch_size):
         max_val = max(abs(np.max(the_heatmap)), abs(np.min(the_heatmap)))
 
         the_image = test_images[i].permute((1, 2, 0)).cpu().numpy()
+        the_image = (the_image - np.min(the_image)) / np.ptp(the_image)
 
         #plt.imshow(the_image, cmap='gray', vmin=np.min(the_image), vmax=np.max(the_image))
         #plt.show()
