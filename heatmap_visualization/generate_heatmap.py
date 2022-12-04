@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 data_dir= '/data/therealgabeguo/fingerprint_data/sd302_oldFingerprintExperiments'
 train_batch_size=128
-test_batch_size=16
+test_batch_size=8
 device = 'cuda:0'
 model_wts_path = 'resnet_fingerprint08'
 
@@ -84,16 +84,32 @@ shap_values = e.shap_values(test_images)
 print(len(shap_values))
 print(shap_values[0].shape)
 
-# show predictions for all test images
+# get model predictions
+batch_pred = model(test_images)
+print(batch_pred.shape)
 
+# max magnitude of all shap values
+max_val = max([max(abs(np.max(the_heatmap)), abs(np.min(the_heatmap))) for the_heatmap in shap_values])
+
+# show SHAP for all test images
 for i in range(test_batch_size):
-    # heatmap for true label and random label
-    for curr_person in test_labels:
+    true_label = test_labels[i]
+    
+    # get true label, most likely label, second most likely label, least likely label
+    curr_probs = batch_pred[i]
+    most_likely_label = torch.argmax(curr_probs)
+    least_likely_label = torch.argmin(curr_probs)
+    second_most_likely_label = torch.topk(curr_probs, 2)[1][1]
+    assert torch.topk(curr_probs, 2)[1][0] == most_likely_label
+
+    # heatmap for true label, most likely label, second most likely label, least likely label
+    for curr_person, the_rank in zip([true_label, most_likely_label, least_likely_label, second_most_likely_label], \
+            ['groundTruth', 'topPred', 'worstPred', 'secondBestPred']):
         the_heatmap = np.reshape(shap_values[curr_person][i], (3, 224, 224))
         the_heatmap = np.transpose(the_heatmap, (1, 2, 0))
         the_heatmap = np.sum(the_heatmap, axis=2)
 
-        max_val = max(abs(np.max(the_heatmap)), abs(np.min(the_heatmap)))
+        #max_val = max(abs(np.max(the_heatmap)), abs(np.min(the_heatmap)))
 
         the_image = test_images[i].permute((1, 2, 0)).cpu().numpy()[:,:,0]
         the_image = (the_image - np.min(the_image)) / np.ptp(the_image)
@@ -101,9 +117,11 @@ for i in range(test_batch_size):
         #plt.imshow(the_image, cmap='gray', vmin=np.min(the_image), vmax=np.max(the_image))
         #plt.show()
 
+        new_filepath = 'shap_outputs/{}_shap{}_{}.png'.format(the_filename[:-4], class_names[curr_person], the_rank)
+
         plt.imshow(the_heatmap, cmap=colors.red_transparent_blue, vmin=-max_val, vmax=max_val)
         the_filename = test_paths[i].split('/')[-1]
-        plt.imsave('shap_outputs/' + the_filename[:-4] + '_shap{}'.format(class_names[curr_person]) + '.png', the_heatmap, cmap=colors.red_transparent_blue, vmin=-max_val, vmax=max_val)
+        plt.imsave(new_filepath, the_heatmap, cmap=colors.red_transparent_blue, vmin=-max_val, vmax=max_val)
         
         plt.imshow(the_image, cmap='gray', vmin=np.min(the_image), vmax=np.max(the_image))
         plt.imsave('shap_outputs/' + the_filename, the_image, cmap='gray', vmin=np.min(the_image), vmax=np.max(the_image))
