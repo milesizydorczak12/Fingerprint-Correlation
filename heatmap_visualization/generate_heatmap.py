@@ -12,10 +12,14 @@ from torchvision import datasets, models, transforms
 import matplotlib.pyplot as plt
 
 data_dir= '/data/therealgabeguo/fingerprint_data/sd302_oldFingerprintExperiments'
-train_batch_size=1#128
-test_batch_size=1#8
-device = 'cuda:0'
+train_batch_size=100
+test_batch_size=8
+device = 'cuda:1'
 model_wts_path = 'resnet_fingerprint08'
+
+import gc
+gc.collect()
+torch.cuda.empty_cache()
 
 # Credit:
 #   https://gist.github.com/andrewjong/6b02ff237533b3b2c554701fb53d5c4d
@@ -56,6 +60,7 @@ dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=batc
               for x in ['train', 'val']}
 dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
+print('loaded datasets')
 
 # get background
 
@@ -69,6 +74,7 @@ model.fc = nn.Linear(model.fc.in_features, 200)
 model.load_state_dict(torch.load(model_wts_path))
 model.eval()
 model = model.to(device)
+print('loaded model')
 
 # get test images
 
@@ -93,6 +99,8 @@ max_val = max([max(abs(np.max(the_heatmap)), abs(np.min(the_heatmap))) for the_h
 
 # show SHAP for all test images
 for i in range(test_batch_size):
+    print('processing sample {} out of {}'.format(i, test_batch_size))
+
     true_label = test_labels[i]
     
     # get true label, most likely label, second most likely label, least likely label
