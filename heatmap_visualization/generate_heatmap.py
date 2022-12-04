@@ -12,8 +12,8 @@ from torchvision import datasets, models, transforms
 import matplotlib.pyplot as plt
 
 data_dir= '/data/therealgabeguo/fingerprint_data/sd302_oldFingerprintExperiments'
-train_batch_size=128
-test_batch_size=8
+train_batch_size=1#128
+test_batch_size=1#8
 device = 'cuda:0'
 model_wts_path = 'resnet_fingerprint08'
 
@@ -117,10 +117,10 @@ for i in range(test_batch_size):
         #plt.imshow(the_image, cmap='gray', vmin=np.min(the_image), vmax=np.max(the_image))
         #plt.show()
 
+        the_filename = test_paths[i].split('/')[-1]
         new_filepath = 'shap_outputs/{}_shap{}_{}.png'.format(the_filename[:-4], class_names[curr_person], the_rank)
 
         plt.imshow(the_heatmap, cmap=colors.red_transparent_blue, vmin=-max_val, vmax=max_val)
-        the_filename = test_paths[i].split('/')[-1]
         plt.imsave(new_filepath, the_heatmap, cmap=colors.red_transparent_blue, vmin=-max_val, vmax=max_val)
         
         plt.imshow(the_image, cmap='gray', vmin=np.min(the_image), vmax=np.max(the_image))
