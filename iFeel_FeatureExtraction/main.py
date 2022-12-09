@@ -50,8 +50,13 @@ if __name__ == '__main__':
     inputPath = args.input
     outputPath = args.output
     outputPath = outputPath if outputPath[-1] != "/" else outputPath[:-1]
-    imageFiles = [str(inputPath + "/" + f) for f in os.listdir(inputPath) if
-                  f.endswith(".png") or f.endswith(".jpg") or f.endswith(".bmp") or f.endswith(".jpeg")]
+    
+    imageFiles = []
+    for root, dirs, files in os.walk(inputPath, topdown=False):
+        for name in files:
+            relPath = os.path.join(root, name)  
+            if relPath.endswith('.png') or relPath.endswith('.jpg') or relPath.endswith('.jpeg') or relPath.endswith('.pneg'):
+                imageFiles.append(os.path.join(inputPath, relPath))
 
     pool = ThreadPool(20)
     pool.map(editImage, imageFiles)
