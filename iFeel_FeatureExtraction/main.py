@@ -47,8 +47,8 @@ if __name__ == '__main__':
     parser.add_argument('--inputPath', dest='input', help='Path to folder containing images', type=str)
     parser.add_argument('--outputPath', dest='output', help='Path to folder to save images', type=str)
     args = parser.parse_args()
-    inputPath = args.input.lower()
-    outputPath = args.output.lower()
+    inputPath = args.input
+    outputPath = args.output
     outputPath = outputPath if outputPath[-1] != "/" else outputPath[:-1]
     imageFiles = [str(inputPath + "/" + f) for f in os.listdir(inputPath) if
                   f.endswith(".png") or f.endswith(".jpg") or f.endswith(".bmp") or f.endswith(".jpeg")]
