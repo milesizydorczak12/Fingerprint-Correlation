@@ -28,7 +28,7 @@ def editImage(inputImg):
         cv2.imwrite(ridgePath, freq)
         cv2.imwrite(orientPath, orient)
         print("{} Finished Level One Extraction".format(enhancedPath))
-        levelTwoExtraction.levelTwoExtraction(inputImg, outputPath)
+        #levelTwoExtraction.levelTwoExtraction(inputImg, outputPath)
         # print(len(x))
         # with open(outputPath+imgBase+'_orientF.csv','w',newline='') as f:
         #    writer = csv.writer(f)
@@ -40,6 +40,7 @@ def editImage(inputImg):
         #    writer = csv.writer(f)
         #    writer.writerows(x,y,theta)
     except Exception:
+        print(inputImg, "doesn't work")
         pass
 
 if __name__ == '__main__':
