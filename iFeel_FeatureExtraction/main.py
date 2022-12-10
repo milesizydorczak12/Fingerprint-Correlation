@@ -10,6 +10,7 @@ import csv
 
 def editImage(inputImg):
     try:
+        #print('processing {}'.format(inputImg))
         imgBase = inputImg[inputImg.rfind("/"):inputImg.rfind(".")]
         maskPath = outputPath + imgBase + "_mask.png"
         enhancedPath = outputPath + imgBase + "_enhanced.png"
@@ -59,5 +60,5 @@ if __name__ == '__main__':
             if relPath.endswith('.png') or relPath.endswith('.jpg') or relPath.endswith('.jpeg') or relPath.endswith('.pneg'):
                 imageFiles.append(os.path.join(inputPath, relPath))
 
-    pool = ThreadPool(20)
+    pool = ThreadPool(50)
     pool.map(editImage, imageFiles)
