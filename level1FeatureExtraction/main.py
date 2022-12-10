@@ -46,11 +46,6 @@ if __name__ == '__main__':
     inputPath = args.input
     outputPath = os.path.join(inputPath, '../l1_feature_extractions')
     os.makedirs(outputPath, exist_ok=True)
-    
-    orientDir = os.path.join(outputPath, 'orient')
-    ridgeFreqDir = os.path.join(outputPath, 'ridgeFreq')
-    for path in [orientDir, ridgeFreqDir]:
-        os.makedirs(path, exist_ok=True)
 
     imageFiles = []
     for root, dirs, files in os.walk(inputPath, topdown=False):
@@ -58,10 +53,10 @@ if __name__ == '__main__':
             relPath = os.path.join(root, name)  
             if relPath.endswith('.png') or relPath.endswith('.jpg') or relPath.endswith('.jpeg') or relPath.endswith('.pneg'):
                 imageFiles.append(os.path.join(inputPath, relPath))
-    
-    pool = ThreadPool(5)
+    """
+    pool = ThreadPool(20)
     pool.map(editImage, imageFiles)
     """
     for img in imageFiles:
         editImage(img)
-    """
+    
