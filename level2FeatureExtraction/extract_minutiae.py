@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 def extraction_process(file, subdir, image_enhancer, enhance_person_dir,
  feature_extractor, minutiae_person_dir, emptyList, freqList, aspectList):
 
-    print('processing', file)
+    #print('processing', file)
 
     MAX_ASPECT_RATIO = 3.2
 
@@ -161,7 +161,9 @@ def main(argv):
     count = 0
 
     # Files to store problematic images
-    with open('empty_images.txt', 'w') as emptyFile, open('bad_freq_images.txt', 'w') as freqFile, open('bad_aspect_images.txt', 'w') as aspectFile:
+    with open('../feature_extractions/empty_images.txt', 'w') as emptyFile, \
+            open('../feature_extractions/bad_freq_images.txt', 'w') as freqFile, \
+            open('../feature_extractions/bad_aspect_images.txt', 'w') as aspectFile:
         emptyList, freqList, aspectList = [], [], []
         all_parameters = []
         for subdir, dirs, files in os.walk(IMAGES_DIR):
