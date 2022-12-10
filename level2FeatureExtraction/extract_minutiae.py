@@ -24,6 +24,8 @@ import matplotlib.pyplot as plt
 def extraction_process(file, subdir, image_enhancer, enhance_person_dir,
  feature_extractor, minutiae_person_dir, emptyList, freqList, aspectList):
 
+    print('processing', file)
+
     MAX_ASPECT_RATIO = 3.2
 
     minutiae_img_map_path = os.path.join(minutiae_person_dir, file)
@@ -138,10 +140,10 @@ def main(argv):
         print("Source directory required and must exist.")
         sys.exit(1)
 
-    ENHANCE_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'../enhance'))
+    ENHANCE_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'../feature_extractions/enhance'))
     os.makedirs(ENHANCE_DIR, exist_ok = True)
 
-    MINUTIAE_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'../minutiae'))
+    MINUTIAE_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'../feature_extractions/minutiae'))
     os.makedirs(MINUTIAE_DIR, exist_ok = True)
 
     # ORIENT_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'../orient'))
@@ -165,12 +167,11 @@ def main(argv):
         for subdir, dirs, files in os.walk(IMAGES_DIR):
             count += 1
             pid = os.path.basename(subdir)
+            """
+            print(pid)
             if not pid:
                 continue
-            '''
-            if count < 59:
-                continue
-            '''
+            """
             enhance_person_dir = os.path.join(ENHANCE_DIR, pid)
             minutiae_person_dir = os.path.join(MINUTIAE_DIR, pid)
             # orient_person_dir = os.path.join(ORIENT_DIR, pid)
