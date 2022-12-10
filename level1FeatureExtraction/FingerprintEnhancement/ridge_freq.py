@@ -80,6 +80,9 @@ def ridge_freq(im, mask, orient, blksze, windsze, minWaveLength, maxWaveLength):
 
     non_zero_elems_in_freq = freq_1d[0][ind]
 
+    #print(non_zero_elems_in_freq.shape)
+    if 0 in non_zero_elems_in_freq.shape:
+        return freq, 0
     meanfreq = np.mean(non_zero_elems_in_freq)
-    medianfreq = np.median(non_zero_elems_in_freq)  # does not work properly
+    #medianfreq = np.median(non_zero_elems_in_freq)  # does not work properly
     return freq, meanfreq

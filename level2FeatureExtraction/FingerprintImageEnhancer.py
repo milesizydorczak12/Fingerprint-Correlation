@@ -516,6 +516,7 @@ class FingerprintImageEnhancer(object):
         # saves the enhanced image at the specified path
         cv2.imwrite(path, (255 * self._binim))
 
+    # returns binarized image, frequency image, orientation image
     def enhance(self, img, filename, resize=True):
         # main function to enhance the image.
         # calls all other subroutines
@@ -532,7 +533,8 @@ class FingerprintImageEnhancer(object):
         self.__ridge_segment(img)   # normalise the image and find a ROI
         self.__ridge_orient()       # compute orientation image
         if not self.__ridge_freq():         # compute major frequency of ridges
-            return None, False, True
+            return None, None, True
         if not self.__ridge_filter(filename):       # filter the image using oriented gabor filter
-            return None, False, False # Not sure if this is right?
-        return self._binim, True, True
+            return None, None, None
+        #return self._binim, True, True
+        return self._binim, self._freq, self._orientim

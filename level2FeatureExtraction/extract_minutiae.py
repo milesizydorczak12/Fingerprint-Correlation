@@ -21,7 +21,7 @@ from functools import partial
 from PIL import Image
 import matplotlib.pyplot as plt
 
-def extraction_process(file, subdir, image_enhancer, enhance_person_dir,
+def extraction_process(file, subdir, image_enhancer, enhance_person_dir, orient_person_dir, freq_person_dir,
  feature_extractor, minutiae_person_dir, emptyList, freqList, aspectList):
 
     #print('processing', file)
@@ -63,9 +63,9 @@ def extraction_process(file, subdir, image_enhancer, enhance_person_dir,
         return
 
     # Enhance
-    binim, freq_success, empty_success = image_enhancer.enhance(img, file, resize=True)
+    binim, freqim, orientim = image_enhancer.enhance(img, file, resize=True)
 
-    if not freq_success:
+    if freqim is None:
         print("File:", file, "Failed enhancement: bad frequency. Skipping...")
         '''
         freqFile.write(file)
@@ -73,7 +73,7 @@ def extraction_process(file, subdir, image_enhancer, enhance_person_dir,
         '''
         freqList.append(file)
         return
-    if not empty_success:
+    if orientim is None:
         print("File:", file, "Failed enhancement: empty file. Skipping...")
         '''
         emptyFile.write(file)
@@ -83,8 +83,8 @@ def extraction_process(file, subdir, image_enhancer, enhance_person_dir,
         return
 
     image_enhancer.save_enhanced_image(os.path.join(enhance_person_dir, file))
-    # cv2.imwrite(os.path.join(orient_person_dir, file), (255 * orientim))
-    # cv2.imwrite(os.path.join(freq_person_dir, file), (255 * freqim))
+    cv2.imwrite(os.path.join(orient_person_dir, file), (255 * orientim))
+    cv2.imwrite(os.path.join(freq_person_dir, file), (255 * freqim))
 
     # Extract features
     img = cv2.imread(os.path.join(enhance_person_dir, file), 0)
@@ -116,8 +116,8 @@ def main(argv):
     IMAGES_DIR = ''
     ENHANCE_DIR = ''
     MINUTIAE_DIR = ''
-    # ORIENT_DIR = ''
-    # FREQ_DIR = ''
+    ORIENT_DIR = ''
+    FREQ_DIR = ''
 
     usage_msg = "Usage: extract_minutiae.py --src <src_dir>"
 
@@ -140,17 +140,19 @@ def main(argv):
         print("Source directory required and must exist.")
         sys.exit(1)
 
-    ENHANCE_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'../feature_extractions/enhance'))
+    FEATURE_EXTRACTION_DIR = '../l2_feature_extractions'
+
+    ENHANCE_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'{}/enhance'.format(FEATURE_EXTRACTION_DIR)))
     os.makedirs(ENHANCE_DIR, exist_ok = True)
 
-    MINUTIAE_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'../feature_extractions/minutiae'))
+    MINUTIAE_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'{}/minutiae'.format(FEATURE_EXTRACTION_DIR)))
     os.makedirs(MINUTIAE_DIR, exist_ok = True)
 
-    # ORIENT_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'../orient'))
-    # os.makedirs(ORIENT_DIR, exist_ok = True)
+    ORIENT_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'{}/orient'.format(FEATURE_EXTRACTION_DIR)))
+    os.makedirs(ORIENT_DIR, exist_ok = True)
 
-    # FREQ_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'../freq'))
-    # os.makedirs(FREQ_DIR, exist_ok = True)
+    FREQ_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'{}/freq'.format(FEATURE_EXTRACTION_DIR)))
+    os.makedirs(FREQ_DIR, exist_ok = True)
 
 
     print("Beginnning feature extraction now...")
@@ -161,9 +163,9 @@ def main(argv):
     count = 0
 
     # Files to store problematic images
-    with open('../feature_extractions/empty_images.txt', 'w') as emptyFile, \
-            open('../feature_extractions/bad_freq_images.txt', 'w') as freqFile, \
-            open('../feature_extractions/bad_aspect_images.txt', 'w') as aspectFile:
+    with open('{}/empty_images.txt'.format(FEATURE_EXTRACTION_DIR), 'w') as emptyFile, \
+            open('{}/bad_freq_images.txt'.format(FEATURE_EXTRACTION_DIR), 'w') as freqFile, \
+            open('{}/bad_aspect_images.txt'.format(FEATURE_EXTRACTION_DIR), 'w') as aspectFile:
         emptyList, freqList, aspectList = [], [], []
         all_parameters = []
         for subdir, dirs, files in os.walk(IMAGES_DIR):
@@ -176,16 +178,16 @@ def main(argv):
             """
             enhance_person_dir = os.path.join(ENHANCE_DIR, pid)
             minutiae_person_dir = os.path.join(MINUTIAE_DIR, pid)
-            # orient_person_dir = os.path.join(ORIENT_DIR, pid)
-            # freq_person_dir = os.path.join(FREQ_DIR, pid)
+            orient_person_dir = os.path.join(ORIENT_DIR, pid)
+            freq_person_dir = os.path.join(FREQ_DIR, pid)
             os.makedirs(enhance_person_dir, exist_ok = True)
             os.makedirs(minutiae_person_dir, exist_ok = True)
-            # os.makedirs(orient_person_dir, exist_ok = True)
-            # os.makedirs(freq_person_dir, exist_ok = True)
+            os.makedirs(orient_person_dir, exist_ok = True)
+            os.makedirs(freq_person_dir, exist_ok = True)
 
             for file in files:
                 if '.png' in file.lower():
-                    all_parameters.append((file, subdir, image_enhancer, enhance_person_dir,
+                    all_parameters.append((file, subdir, image_enhancer, enhance_person_dir, orient_person_dir, freq_person_dir,
                      feature_extractor, minutiae_person_dir, emptyList, freqList, aspectList))
 
         since = time.time()

@@ -80,11 +80,15 @@ def ridge_segment(im,blksze,thresh):
     stddevim = stddevim[0:rows][:,0:cols]
                     
     mask = stddevim > thresh;
-    
-    mean_val = np.mean(im[mask]);
-    
-    std_val = np.std(im[mask]);
-    
+   
+    #print(mask.shape)
+    #print(im.shape)
+    #print(im[mask].shape)
+    if 0 not in im[mask].shape:
+        mean_val = np.mean(im[mask]);
+        std_val = np.std(im[mask]) + 1e-12
+    else:
+        mean_val, std_val = 0, 1
     normim = (im - mean_val)/(std_val);
     
     return(normim,mask)

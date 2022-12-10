@@ -108,6 +108,9 @@ def createMask(img):
 
 
 def imageFilter1(inputPath, outputPath):
+    import warnings 
+    warnings.filterwarnings("error") 
+   
     """this enhances the image by checking all the contours in a binarized image
     you may need to adjust thresholding depending on the contrast of the fingerprint
     if there is low contrast the entire fingerprint may not be fully detected
@@ -118,10 +121,13 @@ def imageFilter1(inputPath, outputPath):
     res = cv2.normalize(img, normalizedImg, 0, 255, cv2.NORM_MINMAX)
     alpha = .8
     beta = 25
+    res = np.clip(alpha * res + beta, 0, 255).astype(np.uint8)
+    """
     for y in range(res.shape[0]):
         for x in range(res.shape[1]):
             for c in range(res.shape[2]):
                 res[y, x, c] = np.clip(alpha * res[y, x, c] + beta, 0, 255)
+    """
     res = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
     res = cv2.equalizeHist(res)
     normalizedImg = np.zeros((800, 800))
@@ -132,19 +138,23 @@ def imageFilter1(inputPath, outputPath):
     res = cv2.filter2D(res, -1, kernel)
     alpha = 1.7
     beta = -40
+    res = np.clip(alpha * res + beta, 0, 255)
+    """
     for x in range(res.shape[0]):
         for c in range(res.shape[1]):
             res[x, c] = np.clip(alpha * res[x, c] + beta, 0, 255)
+    """
     res = cv2.GaussianBlur(res, (5, 5), 0)
+
     ret, res = cv2.threshold(res, 240, 255, cv2.THRESH_BINARY)
     #print(res.shape)
     box = cropCoordinates(res, inputPath, outputPath)
     #print(box)
     cropped = crop_minAreaRect(res, box)
-    height, width = cropped.shape[:2]
+    height, width = cropped.shape#[:2]
     if height < width:
         cropped = np.rot90(cropped)
-    height, width = cropped.shape[:2]
+    height, width = cropped.shape#[:2]
     #print(height,width)
     heightMaster = 356
     widthMaster = 328
@@ -156,11 +166,16 @@ def imageFilter1(inputPath, outputPath):
         h2 += 1
     if width % 2 != 0:
         w2 += 1
+
     newImage = cv2.copyMakeBorder(cropped, h1, h2, w1, w2, cv2.BORDER_CONSTANT, value=(255, 255, 255))
     imgBase = inputPath[inputPath.rfind("/"):inputPath.rfind(".")]
     maskPath = outputPath + imgBase + "_mask.png"
     mask = createMask(newImage)
     cv2.imwrite(maskPath, mask)
+    
+    outputEnhanced = outputPath + imgBase + "_enhanced.png"
+    cv2.imwrite(outputEnhanced, newImage)
+    """
     newImage = main_enhancement(newImage)
     outputEnhanced = outputPath + imgBase + "_enhanced.png"
     cv2.imwrite(outputEnhanced, newImage)
@@ -172,6 +187,7 @@ def imageFilter1(inputPath, outputPath):
                 newImage[y, x] = 255
     cv2.imwrite(outputEnhanced, newImage)
     print("{} Finished Preprocessing".format(outputEnhanced))
+    """
     return newImage
 
 
@@ -225,8 +241,8 @@ def findOrient(img):
                 for x in range(1, img2.shape[1]):
                     bx1, bx2 = img2[y, x], img2[y, x - 1]
                     by1, by2 = img2[y, x], img2[y - 1, x]
-                    gx = bx1 - bx2
-                    gy = by1 - by2
+                    gx = int(bx1) - int(bx2)
+                    gy = int(by1) - int(by2)
                     numerator += (2 * gx * gy)
                     denominator += (math.pow(gx, 2) - math.pow(gy, 2))
             theta = np.pi
