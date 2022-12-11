@@ -3,7 +3,7 @@ extract_minutiae.py
 
 Given a dataset containing image files representing fingerprints and a
 destination directory, populates the destination with matrices for each image
-with ones in each position where there is a minutiae and zeros in all other
+with ones (gaussian blurred) in each position where there is a minutiae and zeros in all other
 positions
 
 '''
@@ -21,7 +21,7 @@ from functools import partial
 from PIL import Image
 import matplotlib.pyplot as plt
 
-def extraction_process(file, subdir, image_enhancer, enhance_person_dir, orient_person_dir, freq_person_dir,
+def extraction_process(file, subdir, image_enhancer, enhance_person_dir,
  feature_extractor, minutiae_person_dir, emptyList, freqList, aspectList):
 
     #print('processing', file)
@@ -83,8 +83,8 @@ def extraction_process(file, subdir, image_enhancer, enhance_person_dir, orient_
         return
 
     image_enhancer.save_enhanced_image(os.path.join(enhance_person_dir, file))
-    cv2.imwrite(os.path.join(orient_person_dir, file), (255 * orientim))
-    cv2.imwrite(os.path.join(freq_person_dir, file), (255 * freqim))
+    # cv2.imwrite(os.path.join(orient_person_dir, file), (255 * orientim))
+    # cv2.imwrite(os.path.join(freq_person_dir, file), (255 * freqim))
 
     # Extract features
     img = cv2.imread(os.path.join(enhance_person_dir, file), 0)
@@ -116,8 +116,6 @@ def main(argv):
     IMAGES_DIR = ''
     ENHANCE_DIR = ''
     MINUTIAE_DIR = ''
-    ORIENT_DIR = ''
-    FREQ_DIR = ''
 
     usage_msg = "Usage: extract_minutiae.py --src <src_dir>"
 
@@ -148,13 +146,6 @@ def main(argv):
     MINUTIAE_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'{}/minutiae'.format(FEATURE_EXTRACTION_DIR)))
     os.makedirs(MINUTIAE_DIR, exist_ok = True)
 
-    ORIENT_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'{}/orient'.format(FEATURE_EXTRACTION_DIR)))
-    os.makedirs(ORIENT_DIR, exist_ok = True)
-
-    FREQ_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'{}/freq'.format(FEATURE_EXTRACTION_DIR)))
-    os.makedirs(FREQ_DIR, exist_ok = True)
-
-
     print("Beginnning feature extraction now...")
     #Enhance fingerprints
     image_enhancer = FingerprintImageEnhancer()
@@ -170,7 +161,9 @@ def main(argv):
         all_parameters = []
         for subdir, dirs, files in os.walk(IMAGES_DIR):
             count += 1
-            pid = os.path.basename(subdir)
+            #print(subdir[len(IMAGES_DIR):])
+            pid = os.path.relpath(subdir, IMAGES_DIR)#os.path.basename(subdir)
+            #print(pid)
             """
             print(pid)
             if not pid:
@@ -178,16 +171,14 @@ def main(argv):
             """
             enhance_person_dir = os.path.join(ENHANCE_DIR, pid)
             minutiae_person_dir = os.path.join(MINUTIAE_DIR, pid)
-            orient_person_dir = os.path.join(ORIENT_DIR, pid)
-            freq_person_dir = os.path.join(FREQ_DIR, pid)
             os.makedirs(enhance_person_dir, exist_ok = True)
             os.makedirs(minutiae_person_dir, exist_ok = True)
-            os.makedirs(orient_person_dir, exist_ok = True)
-            os.makedirs(freq_person_dir, exist_ok = True)
+
+            #print(enhance_person_dir, minutiae_person_dir)
 
             for file in files:
                 if '.png' in file.lower():
-                    all_parameters.append((file, subdir, image_enhancer, enhance_person_dir, orient_person_dir, freq_person_dir,
+                    all_parameters.append((file, subdir, image_enhancer, enhance_person_dir,
                      feature_extractor, minutiae_person_dir, emptyList, freqList, aspectList))
 
         since = time.time()
