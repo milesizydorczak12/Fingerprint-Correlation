@@ -138,7 +138,7 @@ def main(argv):
         print("Source directory required and must exist.")
         sys.exit(1)
 
-    FEATURE_EXTRACTION_DIR = '../l2_feature_extractions'
+    FEATURE_EXTRACTION_DIR = '../img_l2_feature_extractions'
 
     ENHANCE_DIR = os.path.abspath(os.path.join(IMAGES_DIR,'{}/enhance'.format(FEATURE_EXTRACTION_DIR)))
     os.makedirs(ENHANCE_DIR, exist_ok = True)

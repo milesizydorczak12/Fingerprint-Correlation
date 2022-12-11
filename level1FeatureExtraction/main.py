@@ -28,7 +28,7 @@ if __name__ == '__main__':
     parser.add_argument('--src', dest='input', help='Path to folder containing images (should have been enhanced beforehand)', type=str)
     args = parser.parse_args()
     inputPath = args.input
-    outputPath = os.path.join(inputPath, '../l1_feature_extractions')
+    outputPath = os.path.join(inputPath, '../img_l1_feature_extractions')
     os.makedirs(outputPath, exist_ok=True)
     orientDir = os.path.join(outputPath, 'orient')
     os.makedirs(orientDir, exist_ok=True)
