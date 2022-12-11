@@ -13,8 +13,6 @@ python main.py --inputPath ./inputPathImages
 
 # Deprecated
 
-environment.yml
 features.py
 levelTwoExtraction.py
-iFeelScriptRun.py
 FingerprintEnhancement
