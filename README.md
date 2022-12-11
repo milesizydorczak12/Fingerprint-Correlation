@@ -39,11 +39,11 @@ Deep Learning Analysis:
 
 Conventional Feature Extraction:
 - For Level 2, run ```level2FeatureExtraction/extract_minutiae.py --src \[name of your images folder\]```
-  - Saves in folder at same level as the input folder, called ```l2_feature_extractions```; will preserve subdirectory structure
+  - Saves in folder at same level as the input folder, called ```img_l2_feature_extractions```; will preserve subdirectory structure
   - Subfolders in output are ```enhance```, ```minutiae```
 - For Level 1, run ```level1FeatureExtraction/main.py --src \[name of the enhanced images folder\]```
-  - Saves in folder at same level as the input folder, called ```l1_feature_extractions```; will preserve subdirectory structure
-  - Note: Input images should already be enhanced/binarized: we can get these from the output of the Level 2 feature extractions, under the folder ```\[l2_feature_extractions\]/enhance```
+  - Saves in folder at same level as the input folder, called ```img_l1_feature_extractions```; will preserve subdirectory structure
+  - Note: Input images should already be enhanced/binarized: we can get these from the output of the Level 2 feature extractions, under the folder ```img_l2_feature_extractions/enhance```
 
 # Data
 
