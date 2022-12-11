@@ -1,7 +1,11 @@
 # REU-Biometrics-1F
-Summer research project to analyze the pattern correlation among ten fingerprint patterns. Dataset not included, due to NIST restrictions; can be requested from [NIST](https://nigos.nist.gov/datasets/sd302/request). By Miles Izydorczak, Gabe Guo, Wenyao Xu.
+Summer research project to analyze the pattern correlation among ten fingerprint patterns. Dataset not included, due to NIST restrictions; can be requested from [NIST](https://nigos.nist.gov/datasets/sd302/request). By Gabe Guo, Miles Izydorczak, Wenyao Xu.
 
-# Some Info on What This Code Does
+# Installation
+
+TBD
+
+# How to Run
 
 Data Split:
 - Get the dataset from NIST.
@@ -18,3 +22,4 @@ Conventional Feature Extraction:
 - For Level 1, run ```level1FeatureExtraction/main.py --src \[name of the enhanced images folder\]```
   - Saves in folder at same level as the input folder, called ```l1_feature_extractions```; will preserve subdirectory structure
   - Note: Input images should already be enhanced/binarized: we can get these from the output of the Level 2 feature extractions, under the folder ```\[l2_feature_extractions\]/enhance```
+
