@@ -1,6 +1,6 @@
 # REU-Biometrics-1F
 
-Analyzing the pattern correlation among ten fingerprint patterns - first in the world to prove existence of intra-person fingerprint correlation. By Gabe Guo, Miles Izydorczak, Wenyao Xu.
+Analyzing the pattern correlation among ten fingerprint patterns - **first in the world to prove existence of intra-person fingerprint correlation**. By Gabe Guo, Miles Izydorczak, Wenyao Xu.
 
 # Installation
 
