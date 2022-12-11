@@ -1,5 +1,6 @@
 # REU-Biometrics-1F
-Summer research project to analyze the pattern correlation among ten fingerprint patterns. Dataset not included, due to NIST restrictions; can be requested from [NIST](https://nigos.nist.gov/datasets/sd302/request). By Gabe Guo, Miles Izydorczak, Wenyao Xu.
+
+Analyzing the pattern correlation among ten fingerprint patterns - first in the world to prove existence of intra-person fingerprint correlation. By Gabe Guo, Miles Izydorczak, Wenyao Xu.
 
 # Installation
 
@@ -24,3 +25,6 @@ Conventional Feature Extraction:
   - Saves in folder at same level as the input folder, called ```l1_feature_extractions```; will preserve subdirectory structure
   - Note: Input images should already be enhanced/binarized: we can get these from the output of the Level 2 feature extractions, under the folder ```\[l2_feature_extractions\]/enhance```
 
+# Data
+
+Dataset not included, due to NIST restrictions. Can be requested from [NIST](https://nigos.nist.gov/datasets/sd302/request). 
