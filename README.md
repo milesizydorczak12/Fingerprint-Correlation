@@ -26,8 +26,6 @@ six==1.16.0
 torch==1.10.2
 torchvision==0.11.2
 
-**Incomplete**
-
 # How to Run
 
 Data Split:
