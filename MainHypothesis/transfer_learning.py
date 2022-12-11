@@ -206,7 +206,7 @@ def run_deep_learning(BATCH_SIZE=16, LEARNING_RATE=0.01, NUM_EPOCHS=25, LR_DECAY
     # Make a grid from batch
     out = torchvision.utils.make_grid(inputs)
 
-    model_ft = models.resnet50(pretrained=IS_PRETRAINED)
+    model_ft = models.resnet18(pretrained=IS_PRETRAINED)
     num_ftrs = model_ft.fc.in_features
 
     if len(CUDA_DEVICE_IDS) == 1:
@@ -219,7 +219,6 @@ def run_deep_learning(BATCH_SIZE=16, LEARNING_RATE=0.01, NUM_EPOCHS=25, LR_DECAY
         model_ft = nn.DataParallel(model_ft, device_ids=CUDA_DEVICE_IDS)
 
     model_ft = model_ft.to(device)
-
 
     criterion = nn.CrossEntropyLoss()
 
