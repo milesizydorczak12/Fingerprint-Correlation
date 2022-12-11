@@ -7,16 +7,18 @@ import os
 import time
 
 
-def editImage(inputImg):
+def editImage(inputImg, root_dir):
     try:
-        imgName = inputImg.split('/')[-1]
+        imgName = os.path.relpath(inputImg, root_dir)#inputImg.split('/')[-1]
         #print('processing {}'.format(inputImg))
         enhancedPath = inputImg # NOTE: Should have passed enhanced images
         orientPath = os.path.join(orientDir, imgName)
         ridgePath = os.path.join(freqDir, imgName)
         orient, orientList = levelOneExtraction.findOrientationPhase(enhancedPath)
         freq, ridgeCount = levelOneExtraction.findRidgeFlowCount(enhancedPath, orientList)
+        os.makedirs(os.path.dirname(ridgePath), exist_ok=True)
         cv2.imwrite(ridgePath, freq)
+        os.makedirs(os.path.dirname(orientPath), exist_ok=True)
         cv2.imwrite(orientPath, orient)
         #print("{} Finished Level One Extraction".format(enhancedPath))
     except Exception as e:
@@ -38,19 +40,19 @@ if __name__ == '__main__':
     imageFiles = []
     for root, dirs, files in os.walk(inputPath, topdown=False):
         for name in files:
-            relPath = os.path.join(root, name)  
+            relPath = os.path.join(root, name)
             if relPath.endswith('.png') or relPath.endswith('.jpg') or relPath.endswith('.jpeg') or relPath.endswith('.pneg'):
                 imageFiles.append(relPath)
-    """
-    pool = ThreadPool(20)
-    pool.map(editImage, imageFiles)
-    """
+                # print(relPath)
+
+    # TODO: find way to preserve folder structure
+
     print('start level 1 feature extraction')
     
     since = time.time()
 
     for img in imageFiles:
-        editImage(img)
+        editImage(img, inputPath)
     
     elapsed = time.time() - since
 
