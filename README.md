@@ -4,7 +4,29 @@ Analyzing the pattern correlation among ten fingerprint patterns - **first in th
 
 # Installation
 
-TBD
+colorama==0.3.7
+imutils==0.5.4
+llvmlite==0.36.0
+matplotlib==3.3.4
+networkx==2.5.1
+numba==0.53.1
+numpy==1.19.5
+opencv-python==4.6.0.66
+pandas==1.1.5
+pickleshare==0.7.4
+Pillow==8.4.0
+protobuf==3.7.1
+pyimage==0.1.1
+PyWavelets==1.1.1
+scikit-image==0.17.2
+scikit-learn==0.24.2
+scipy==1.5.4
+shap==0.41.0
+six==1.16.0
+torch==1.10.2
+torchvision==0.11.2
+
+**Incomplete**
 
 # How to Run
 
