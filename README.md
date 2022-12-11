@@ -9,11 +9,12 @@ TBD
 
 Data Split:
 - Get the dataset from NIST.
-- Run ```gather_nist_data.py```, which does a train-val split on the data.
-- Will need to change root_dir on line 5 of ```run_all_fgrp.py```, data_dir on line 46 of ```transfer_learning.py```, ```MainHypothesis/fingerprint_data/features_examined.txt``` (this one just for logging purposes, according to the images we pass in).
+- Run ```gather_nist_data.py --train_src <string of training_src_dirs separated by spaces> --test_src <string of testing_src_dirs separated by spaces> --dest <dest_dir> [--summary]```, which does a train-val split on the data.
+  - Will need to change ```root_dir``` on line 5 of ```run_all_fgrp.py```
 
 Deep Learning Analysis:
 - Run ```MainHypothesis/run_all_fgrp.py```. 
+  - Will need to change ```data_dir``` on line 46 of ```transfer_learning.py```, ```MainHypothesis/fingerprint_data/features_examined.txt``` (this one just for logging purposes, according to the images we pass in).
 
 Conventional Feature Extraction:
 - For Level 2, run ```level2FeatureExtraction/extract_minutiae.py --src \[name of your images folder\]```
