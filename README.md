@@ -4,6 +4,8 @@ Analyzing the pattern correlation among ten fingerprint patterns - **first in th
 
 # Installation
 
+Python 3.6.9
+
 imutils==0.5.4
 matplotlib==3.3.4
 numpy==1.16.2
