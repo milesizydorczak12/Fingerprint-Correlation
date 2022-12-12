@@ -1,6 +1,6 @@
 # REU-Biometrics-1F
 
-Open-source code for _Exploring an Intra-Person Fingerprint Correlation_ (paper under submission). Project summary: **Contrary to the commonly held belief that no two fingerprints are alike, we show with 99.5%+ confidence that fingerprints from different fingers from the same person share some commonality, _i.e._, intra-person fingerprint correlation.**. By Gabe Guo, Miles Izydorczak, Wenyao Xu.
+Open-source code for _Exploring an Intra-Person Fingerprint Correlation_ (paper under submission). Project summary: "Contrary to the commonly held belief that no two fingerprints are alike, we show with 99.5%+ confidence that **fingerprints from different fingers from the same person share some commonality**, _i.e._, intra-person fingerprint correlation". By Gabe Guo, Miles Izydorczak, Wenyao Xu.
 
 # Installation
 
