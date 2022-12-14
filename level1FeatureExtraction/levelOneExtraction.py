@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import math
 import imutils
-from FingerprintEnhancement.main_enhancement import main_enhancement
 
 
 def overlapping1D(line1, line2):
@@ -105,90 +104,6 @@ def createMask(img):
     cv2.drawContours(mask, [hull], 0, 255, -1)
     # print(np.count_nonzero(mask))
     return mask
-
-
-def imageFilter1(inputPath, outputPath):
-    import warnings 
-    warnings.filterwarnings("error") 
-   
-    """this enhances the image by checking all the contours in a binarized image
-    you may need to adjust thresholding depending on the contrast of the fingerprint
-    if there is low contrast the entire fingerprint may not be fully detected
-    additional preprocessing may be required if that is the case"""
-    img = cv2.imread(inputPath)
-    # res = cv2.fastNlMeansDenoising(img, None, 40, 7, 21)
-    normalizedImg = np.zeros((800, 800))
-    res = cv2.normalize(img, normalizedImg, 0, 255, cv2.NORM_MINMAX)
-    alpha = .8
-    beta = 25
-    res = np.clip(alpha * res + beta, 0, 255).astype(np.uint8)
-    """
-    for y in range(res.shape[0]):
-        for x in range(res.shape[1]):
-            for c in range(res.shape[2]):
-                res[y, x, c] = np.clip(alpha * res[y, x, c] + beta, 0, 255)
-    """
-    res = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
-    res = cv2.equalizeHist(res)
-    normalizedImg = np.zeros((800, 800))
-    res = cv2.normalize(res, normalizedImg, 0, 255, cv2.NORM_MINMAX)
-    res = cv2.adaptiveThreshold(res, 255, cv2.ADAPTIVE_THRESH_MEAN_C,
-                                cv2.THRESH_BINARY, 11, 2)
-    kernel = np.ones((5, 5), np.float32) / 25
-    res = cv2.filter2D(res, -1, kernel)
-    alpha = 1.7
-    beta = -40
-    res = np.clip(alpha * res + beta, 0, 255)
-    """
-    for x in range(res.shape[0]):
-        for c in range(res.shape[1]):
-            res[x, c] = np.clip(alpha * res[x, c] + beta, 0, 255)
-    """
-    res = cv2.GaussianBlur(res, (5, 5), 0)
-
-    ret, res = cv2.threshold(res, 240, 255, cv2.THRESH_BINARY)
-    #print(res.shape)
-    box = cropCoordinates(res, inputPath, outputPath)
-    #print(box)
-    cropped = crop_minAreaRect(res, box)
-    height, width = cropped.shape#[:2]
-    if height < width:
-        cropped = np.rot90(cropped)
-    height, width = cropped.shape#[:2]
-    #print(height,width)
-    heightMaster = 356
-    widthMaster = 328
-    h1 = int(abs(heightMaster - height) / 2)
-    h2 = h1
-    w1 = int(abs(widthMaster - width) / 2)
-    w2 = w1
-    if height % 2 != 0:
-        h2 += 1
-    if width % 2 != 0:
-        w2 += 1
-
-    newImage = cv2.copyMakeBorder(cropped, h1, h2, w1, w2, cv2.BORDER_CONSTANT, value=(255, 255, 255))
-    imgBase = inputPath[inputPath.rfind("/"):inputPath.rfind(".")]
-    maskPath = outputPath + imgBase + "_mask.png"
-    mask = createMask(newImage)
-    cv2.imwrite(maskPath, mask)
-    
-    outputEnhanced = outputPath + imgBase + "_enhanced.png"
-    cv2.imwrite(outputEnhanced, newImage)
-    """
-    newImage = main_enhancement(newImage)
-    outputEnhanced = outputPath + imgBase + "_enhanced.png"
-    cv2.imwrite(outputEnhanced, newImage)
-    newImage = cv2.imread(outputEnhanced, 0)
-    newImage = cv2.bitwise_not(newImage)
-    for y in range(heightMaster):
-        for x in range(widthMaster):
-            if mask[y, x] != 255:
-                newImage[y, x] = 255
-    cv2.imwrite(outputEnhanced, newImage)
-    print("{} Finished Preprocessing".format(outputEnhanced))
-    """
-    return newImage
 
 
 def getColor(coordinates, img):

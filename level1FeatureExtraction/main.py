@@ -14,16 +14,20 @@ def editImage(inputImg, root_dir):
         enhancedPath = inputImg # NOTE: Should have passed enhanced images
         orientPath = os.path.join(orientDir, imgName)
         ridgePath = os.path.join(freqDir, imgName)
-        orient, orientList = levelOneExtraction.findOrientationPhase(enhancedPath)
-        freq, ridgeCount = levelOneExtraction.findRidgeFlowCount(enhancedPath, orientList)
-        os.makedirs(os.path.dirname(ridgePath), exist_ok=True)
-        cv2.imwrite(ridgePath, freq)
-        os.makedirs(os.path.dirname(orientPath), exist_ok=True)
-        cv2.imwrite(orientPath, orient)
+        if not os.path.exists(orientPath) or not os.path.exists(ridgePath):
+            orient, orientList = levelOneExtraction.findOrientationPhase(enhancedPath)
+        if not os.path.exists(ridgePath):
+            freq, ridgeCount = levelOneExtraction.findRidgeFlowCount(enhancedPath, orientList)
+            os.makedirs(os.path.dirname(ridgePath), exist_ok=True)
+            cv2.imwrite(ridgePath, freq)
+        if not os.path.exists(orientPath):
+            os.makedirs(os.path.dirname(orientPath), exist_ok=True)
+            cv2.imwrite(orientPath, orient)
         #print("{} Finished Level One Extraction".format(enhancedPath))
     except Exception as e:
         print(inputImg, "doesn't work")
         pass
+    return
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('Master Run File')
