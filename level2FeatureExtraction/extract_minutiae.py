@@ -30,82 +30,92 @@ def extraction_process(file, subdir, image_enhancer, enhance_person_dir,
 
     minutiae_img_map_path = os.path.join(minutiae_person_dir, file)
     file_noExt = file.split('.')[0]
-    minutiae_np_array_path = os.path.join(minutiae_person_dir, file_noExt)
-    if os.path.exists(minutiae_img_map_path):
-        #print(minutiae_map_path, 'exists already')
-        return
-    if os.path.exists(minutiae_np_array_path):
+    minutiae_np_array_path = os.path.join(minutiae_person_dir, file_noExt) + '.npy'
+
+    enhanced_img_path = os.path.join(enhance_person_dir, file)
+
+    # if os.path.exists(minutiae_img_map_path):
+    #     #print(minutiae_map_path, 'exists already')
+    #     return
+    # if os.path.exists(minutiae_np_array_path):
+    #     result_matrix = np.load(minutiae_np_array_path)
+    #     plt.imsave(os.path.join(minutiae_person_dir, file), result_matrix)
+    #     return
+
+    if not os.path.exists(enhanced_img_path):
+        #print(enhanced_img_path)
+        #print(file)
+        img = cv2.imread(os.path.join(subdir, file))
+        # Convert to grayscale
+        if(len(img.shape) > 2):
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        # Crop to remove excess whitespace
+        invertImg = 255 - img
+        positions = np.nonzero(invertImg)
+        top = positions[0].min()
+        bottom = positions[0].max()
+        left = positions[1].min()
+        right = positions[1].max()
+        img = img[top:bottom, left:right]
+
+        (rows, cols) = img.shape
+
+        if 0 in img.shape or float(rows) / float(cols) > MAX_ASPECT_RATIO or float(cols) / float(rows) > MAX_ASPECT_RATIO:
+            print("File:", file, "Failed enhancement: bad aspect ratio. Skipping...")
+            file_info = {'fname' : file, 'rows' : rows, 'cols' : cols}
+            aspectList.append(file_info)
+            return
+
+        # Enhance
+        binim, freqim, orientim = image_enhancer.enhance(img, file, resize=True)
+
+        if freqim is None:
+            print("File:", file, "Failed enhancement: bad frequency. Skipping...")
+            '''
+            freqFile.write(file)
+            freqFile.write('\n')
+            '''
+            freqList.append(file)
+            return
+        if orientim is None:
+            print("File:", file, "Failed enhancement: empty file. Skipping...")
+            '''
+            emptyFile.write(file)
+            emptyFile.write('\n')
+            '''
+            emptyList.append(file)
+            return
+
+        image_enhancer.save_enhanced_image(os.path.join(enhance_person_dir, file))
+        # cv2.imwrite(os.path.join(orient_person_dir, file), (255 * orientim))
+        # cv2.imwrite(os.path.join(freq_person_dir, file), (255 * freqim))
+
+    if not os.path.exists(minutiae_np_array_path):
+        #print(minutiae_np_array_path)
+        # Extract features
+        img = cv2.imread(os.path.join(enhance_person_dir, file), 0)
+        #img = binim * 255
+        FeaturesTerminations, FeaturesBifurcations = feature_extractor.extractMinutiaeFeatures(img, 10)
+
+        result_matrix = np.zeros(feature_extractor._skel.shape)#result_matrix = np.empty(feature_extractor._skel.shape)
+
+        for feat in FeaturesTerminations:
+            result_matrix[feat.locX][feat.locY] = 1.0
+        for feat in FeaturesBifurcations:
+            result_matrix[feat.locX][feat.locY] = 1.0
+
+        result_matrix = result_matrix * 255
+        result_matrix = gaussian_filter(result_matrix, sigma=5)
+
+        file_noExt = file.split('.')[0]
+        np.save(os.path.join(minutiae_person_dir, file_noExt), result_matrix)
+
+    if not os.path.exists(minutiae_img_map_path):
+        #print(minutiae_img_map_path)
+        #plt.imshow(result_matrix)
         result_matrix = np.load(minutiae_np_array_path)
         plt.imsave(os.path.join(minutiae_person_dir, file), result_matrix)
-        return
-
-    #print(file)
-    img = cv2.imread(os.path.join(subdir, file))
-    # Convert to grayscale
-    if(len(img.shape) > 2):
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    # Crop to remove excess whitespace
-    invertImg = 255 - img
-    positions = np.nonzero(invertImg)
-    top = positions[0].min()
-    bottom = positions[0].max()
-    left = positions[1].min()
-    right = positions[1].max()
-    img = img[top:bottom, left:right]
-
-    (rows, cols) = img.shape
-
-    if 0 in img.shape or float(rows) / float(cols) > MAX_ASPECT_RATIO or float(cols) / float(rows) > MAX_ASPECT_RATIO:
-        print("File:", file, "Failed enhancement: bad aspect ratio. Skipping...")
-        file_info = {'fname' : file, 'rows' : rows, 'cols' : cols}
-        aspectList.append(file_info)
-        return
-
-    # Enhance
-    binim, freqim, orientim = image_enhancer.enhance(img, file, resize=True)
-
-    if freqim is None:
-        print("File:", file, "Failed enhancement: bad frequency. Skipping...")
-        '''
-        freqFile.write(file)
-        freqFile.write('\n')
-        '''
-        freqList.append(file)
-        return
-    if orientim is None:
-        print("File:", file, "Failed enhancement: empty file. Skipping...")
-        '''
-        emptyFile.write(file)
-        emptyFile.write('\n')
-        '''
-        emptyList.append(file)
-        return
-
-    image_enhancer.save_enhanced_image(os.path.join(enhance_person_dir, file))
-    # cv2.imwrite(os.path.join(orient_person_dir, file), (255 * orientim))
-    # cv2.imwrite(os.path.join(freq_person_dir, file), (255 * freqim))
-
-    # Extract features
-    img = cv2.imread(os.path.join(enhance_person_dir, file), 0)
-    img = binim * 255
-    FeaturesTerminations, FeaturesBifurcations = feature_extractor.extractMinutiaeFeatures(img, 10)
-
-    result_matrix = np.zeros(feature_extractor._skel.shape)#result_matrix = np.empty(feature_extractor._skel.shape)
-
-    for feat in FeaturesTerminations:
-        result_matrix[feat.locX][feat.locY] = 1.0
-    for feat in FeaturesBifurcations:
-        result_matrix[feat.locX][feat.locY] = 1.0
-
-    result_matrix = result_matrix * 255
-    result_matrix = gaussian_filter(result_matrix, sigma=5)
-
-    file_noExt = file.split('.')[0]
-    np.save(os.path.join(minutiae_person_dir, file_noExt), result_matrix)
-
-    #plt.imshow(result_matrix)
-    plt.imsave(os.path.join(minutiae_person_dir, file), result_matrix)
 
     return
 
