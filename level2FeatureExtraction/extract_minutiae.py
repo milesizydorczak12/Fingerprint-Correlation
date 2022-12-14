@@ -164,9 +164,10 @@ def main(argv):
     count = 0
 
     # Files to store problematic images
-    with open('{}/empty_images.txt'.format(FEATURE_EXTRACTION_DIR), 'w') as emptyFile, \
-            open('{}/bad_freq_images.txt'.format(FEATURE_EXTRACTION_DIR), 'w') as freqFile, \
-            open('{}/bad_aspect_images.txt'.format(FEATURE_EXTRACTION_DIR), 'w') as aspectFile:
+    OUTPUT_DIR = os.path.join(IMAGES_DIR, FEATURE_EXTRACTION_DIR)
+    with open('{}/empty_images.txt'.format(OUTPUT_DIR), 'w') as emptyFile, \
+            open('{}/bad_freq_images.txt'.format(OUTPUT_DIR), 'w') as freqFile, \
+            open('{}/bad_aspect_images.txt'.format(OUTPUT_DIR), 'w') as aspectFile:
         emptyList, freqList, aspectList = [], [], []
         all_parameters = []
         for subdir, dirs, files in os.walk(IMAGES_DIR):
