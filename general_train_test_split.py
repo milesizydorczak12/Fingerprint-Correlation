@@ -82,30 +82,33 @@ def split(root_dir, val_fgrps, train_fgrps):
 
     for group in ['train', 'val']:
         print('For group', group)
+        """
         print('\tnumber of samples per person id:')
         for the_id in sorted(pid_2_numSamples[group]):
             print('\t\t' + the_id + ':' , pid_2_numSamples[group][the_id])
         print('\tnumber of samples per fingerprint:')
         for the_fgrp in sorted(fgrp_2_numSamples[group]):
             print('\t\t' + the_fgrp + ':', fgrp_2_numSamples[group][the_fgrp])
+        """
         print('\taverage number of samples per person id:',
         sum(pid_2_numSamples[group].values()) / len(pid_2_numSamples[group].values())
         )
         print('\ttotal number samples:', sum(pid_2_numSamples[group].values()))
         print('\ttotal number samples:', sum(fgrp_2_numSamples[group].values()))
 
+        """
         print('\tnumber of used samples per person id:')
         for the_id in sorted(pid_2_numUsedSamples[group]):
             print('\t\t' + str(the_id) + ':' , pid_2_numUsedSamples[group][the_id])
         print('\tnumber of used samples per fingerprint:')
         for the_fgrp in sorted(fgrp_2_numUsedSamples[group]):
             print('\t\t' + str(the_fgrp) + ':', fgrp_2_numUsedSamples[group][the_fgrp])
+        """
         print('\taverage number of used samples per person id:',
         sum(pid_2_numUsedSamples[group].values()) / len(pid_2_numUsedSamples[group].values())
         )
         print('\tstandard deviation of used samples per fingerprint:',
             statistics.stdev(pid_2_numUsedSamples[group].values()))
-
         print('\ttotal number used samples:', sum(pid_2_numUsedSamples[group].values()))
         print('\ttotal number used samples:', sum(fgrp_2_numUsedSamples[group].values()))
 

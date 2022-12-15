@@ -2,13 +2,21 @@ import os, sys
 
 #sys.path.append('/home/gabeguo/Biometric_Research/Fingerprint/REU-Biometrics-1F/')
 sys.path.append('../')
-root_dir = '/data/therealgabeguo/fingerprint_data/sd302_oldFingerprintExperiments'
+
+results_dir = '/data/therealgabeguo/old_fingerprint_correlation_results'
+os.makedirs(results_dir, exist_ok=True)
+
+vanilla_img_dir = '/data/therealgabeguo/fingerprint_data/sd302_oldFingerprintExperiments'
+enhanced_img_dir = '/data/therealgabeguo/fingerprint_data/img_l2_feature_extractions/enhance'
+minutiae_img_dir = '/data/therealgabeguo/fingerprint_data/img_l2_feature_extractions/minutiae'
+ridgeFreq_img_dir = '/data/therealgabeguo/fingerprint_data/img_l2_feature_extractions/img_l1_feature_extractions/freq'
+ridgeOrient_img_dir = '/data/therealgabeguo/fingerprint_data/img_l2_feature_extractions/img_l1_feature_extractions/orient'
+
+root_dir = vanilla_img_dir
 
 if __name__ == '__main__':
     import general_train_test_split
     import transfer_learning
-
-    FEATURE_INFO_FNAME = 'features_examined.txt'
 
     BATCH_SIZE=16
     LEARNING_RATE=0.001
@@ -19,12 +27,12 @@ if __name__ == '__main__':
     WEIGHT_DECAY=5e-5
     IS_PRETRAINED=True
 
-    with open('fingerprint_data/' + FEATURE_INFO_FNAME, 'r') as fin:
-        features_examined = fin.readline().strip()
+    assert root_dir[-1] != '/' # can't end path with a /, because feature name won't be properly read
+    features_examined = root_dir.split('/')[-1]
 
     print('features examined:', features_examined)
 
-    with open('deep_learning_results/' + features_examined.strip() + '.txt', 'w') as fout:
+    with open(os.path.join(results_dir, features_examined + '.txt'), 'w') as fout:
         for i in range(1, 10 + 1):
             print('running train test split to val', i)
             general_train_test_split.main(root_dir=root_dir, train_fgrps=[j for j in range(1, 10 + 1) if i != j], val_fgrps = [i])
@@ -50,7 +58,10 @@ if __name__ == '__main__':
                 LR_DECAY_STEP=LR_DECAY_STEP, \
                 MOMENTUM=MOMENTUM, \
                 WEIGHT_DECAY=WEIGHT_DECAY, \
-                IS_PRETRAINED=IS_PRETRAINED)
+                IS_PRETRAINED=IS_PRETRAINED, \
+                data_dir=root_dir, \
+                results_dir=results_dir, \
+                features_examined=features_examined)
 
             fout.write(str(results_dict))
             fout.write('\n\n\n********************')
